@@ -1,11 +1,11 @@
 name: WorldSigns
 main: me.VetBakSim.worldsigns.Main
 version: 1.0
-author: 1.0
+author: VetBakSim
 website: http://www.kipnetwork.net/
 
 permissions:
   worldsigns.remove:
-    deafult: op
+    default: op
   worldsigns.add:
-    deafult: op
+    default: op
