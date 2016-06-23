@@ -1,5 +1,6 @@
 package me.VetBakSim.worldsigns;
 
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Sign;
 import org.bukkit.scheduler.BukkitRunnable;
