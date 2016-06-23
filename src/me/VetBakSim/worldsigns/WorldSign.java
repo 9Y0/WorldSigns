@@ -15,7 +15,10 @@ public class WorldSign extends BukkitRunnable {
 	}
 
 	public void remove() {
-		// TODO
+		SignManager.getInstance().getSigns().remove(this.sign.getLocation());
+		this.cancel();
+		if (this.sign != null)
+			this.sign.setType(Material.AIR);
 	}
 
 	public World getWorldToSendTo() {
