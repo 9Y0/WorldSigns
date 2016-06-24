@@ -84,7 +84,7 @@ public class SignManager {
 				System.err.println("y: " + sl.getInt("y"));
 				System.err.println("z: " + sl.getInt("z"));
 				System.err.println("wereld: " + sl.getString("wereld"));
-				return;
+				continue;
 			}
 
 			Sign sign = (Sign) b.getState();
