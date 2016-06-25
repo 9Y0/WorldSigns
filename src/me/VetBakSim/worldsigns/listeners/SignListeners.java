@@ -40,7 +40,16 @@ public class SignListeners implements Listener {
 				p.sendMessage(ChatColor.RED + e.getLine(1) + " is niet een wereld in deze server!");
 				return;
 			}
-			SignManager.getInstance().addSign((Sign) e.getBlock().getState(), worldToSendTo);
+
+			if (!isInteger(e.getLine(2)) || Integer.parseInt(e.getLine(2)) < 1 || Integer.parseInt(e.getLine(2)) > 4) {
+				p.sendMessage(ChatColor.RED
+						+ "Usage:\nRegel 1: [WorldSign]\nRegel 2: Wereld naam\nRegel 3: Zone nummer(1t/m4)");
+				e.getBlock().breakNaturally();
+				return;
+			}
+
+			SignManager.getInstance().addSign((Sign) e.getBlock().getState(), worldToSendTo,
+					Integer.parseInt(e.getLine(2)));
 		}
 	}
 
@@ -56,6 +65,10 @@ public class SignListeners implements Listener {
 		for (WorldSign wsign : SignManager.getInstance().getSigns().values()) {
 			if (wsign.getSign().getLocation().equals(b.getLocation())) {
 				World worldToSendTo = wsign.getWorldToSendTo();
+				if (!p.hasPermission("worldsigns.zone." + wsign.getZone())) {
+					p.sendMessage(ChatColor.RED + "Je mag niet naar een wereld in deze zone gaan!");
+					return;
+				}
 				p.teleport(worldToSendTo.getSpawnLocation());
 				p.sendMessage(ChatColor.GREEN + "Je bent naar de wereld " + ChatColor.DARK_GREEN
 						+ worldToSendTo.getName() + ChatColor.GREEN + " gestuurd!");
@@ -91,6 +104,15 @@ public class SignListeners implements Listener {
 			e.setCancelled(true);
 			p.sendMessage(ChatColor.GOLD
 					+ "Weet je zeker dat je deze worldsign wil weghalen? Zoja, sloop hem dan nog een keer!");
+		}
+	}
+
+	private boolean isInteger(String str) {
+		try {
+			Integer.parseInt(str);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

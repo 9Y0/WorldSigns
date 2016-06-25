@@ -21,8 +21,8 @@ public class SignManager {
 		this.signs = new HashMap<>();
 	}
 
-	public WorldSign addSign(Sign sign, World worldToSendTo) {
-		WorldSign wsign = new WorldSign(sign, worldToSendTo);
+	public WorldSign addSign(Sign sign, World worldToSendTo, int zone) {
+		WorldSign wsign = new WorldSign(sign, worldToSendTo, zone);
 		wsign.runTaskTimer(Main.getInstance(), 0L, 40L);
 		this.signs.put(sign.getLocation(), wsign);
 		return wsign;
@@ -54,6 +54,7 @@ public class SignManager {
 			sl.set("z", loc.getZ());
 			sl.set("wereld", loc.getWorld().getName());
 			s.set("naarToeStuurWereld", wsign.getWorldToSendTo().getName());
+			s.set("zone", wsign.getZone());
 		}
 
 		ConfigManager.getSigns().save();
@@ -89,7 +90,7 @@ public class SignManager {
 
 			Sign sign = (Sign) b.getState();
 
-			this.addSign(sign, worldToSendTo);
+			this.addSign(sign, worldToSendTo, s.getInt("zone"));
 
 			cfg.set(id, null);
 		}

@@ -9,3 +9,11 @@ permissions:
     default: op
   worldsigns.add:
     default: op
+  worldsigns.zone.1:
+    default: op
+  worldsigns.zone.2:
+    default: op
+  worldsigns.zone.3:
+    default: op
+  worldsigns.zone.4:
+    default: op
